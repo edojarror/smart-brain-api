@@ -20,22 +20,18 @@ const db = knex ({
 
 const app = express();
 
-app.use(cors());
 app.use(bodyParser.json());
-app.use(function(req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(cors({origin: ["http://localhost:3000","https://fr-smart-brain.herokuapp.com"]}));
+app.options("*", cors());
 
 app.get('/', (req, res) => {
     res.send("it is working!");
 });
 
-app.options('*', cors())
+
 app.post("/signin", (req, res) => {signin.handleSignin(req, res, db, bcrypt)});
-app.options('*', cors())
-app.post('/register', cors(), (req, res, next) => {register.handleRegister(req, res, db, bcrypt, cors)});
+
+app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)});
 
 app.get('/profile/:id', (req, res) => {profile.handleProfileGet(req, res, db)});
 
