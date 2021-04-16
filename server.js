@@ -34,8 +34,8 @@ app.get('/', (req, res) => {
 
 
 app.post("/signin", (req, res) => {signin.handleSignin(req, res, db, bcrypt)});
-
-app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)});
+app.options('/register', cors())
+app.post('/register', cors(), (req, res, next) => {register.handleRegister(req, res, db, bcrypt)});
 
 app.get('/profile/:id', (req, res) => {profile.handleProfileGet(req, res, db)});
 
