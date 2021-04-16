@@ -19,7 +19,7 @@ const db = knex ({
   });
 
 const corsOptions = {
-  origin: 'https://git.heroku.com/fr-smart-brain.git',
+  origin: 'https://fr-smart-brain.herokuapp.com',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 const app = express();
