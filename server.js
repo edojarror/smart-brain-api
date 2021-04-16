@@ -18,21 +18,15 @@ const db = knex ({
     }
   });
 
-const whitelist = ['https://fr-smart-brain.herokuapp.com']
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.get('/', (req, res) => {
     res.send("it is working!");
@@ -41,7 +35,7 @@ app.get('/', (req, res) => {
 
 app.post("/signin", (req, res) => {signin.handleSignin(req, res, db, bcrypt)});
 
-app.post('/register',cors(corsOptions), (req, res, next) => {register.handleRegister(req, res, db, bcrypt)});
+app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)});
 
 app.get('/profile/:id', (req, res) => {profile.handleProfileGet(req, res, db)});
 
