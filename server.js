@@ -21,12 +21,7 @@ const db = knex ({
 
 const app = express();
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS")
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, X-Auth-Token, Accept");
-    next();
-});
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
@@ -36,7 +31,7 @@ app.get('/', (req, res) => {
 
 app.post("/signin", (req, res) => {signin.handleSignin(req, res, db, bcrypt)});
 
-app.post('/register',cors(), (req, res) => {register.handleRegister(req, res, db, bcrypt)});
+app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)});
 
 app.get('/profile/:id', (req, res) => {profile.handleProfileGet(req, res, db)});
 
