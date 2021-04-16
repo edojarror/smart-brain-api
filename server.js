@@ -18,7 +18,10 @@ const db = knex ({
     }
   });
 
-
+const corsOptions = {
+  origin: 'https://git.heroku.com/fr-smart-brain.git',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 const app = express();
 
 app.use(cors());
@@ -31,7 +34,7 @@ app.get('/', (req, res) => {
 
 app.post("/signin", (req, res) => {signin.handleSignin(req, res, db, bcrypt)});
 
-app.post('/register', (req, res, next) => {register.handleRegister(req, res, db, bcrypt)});
+app.post('/register',cors(corsOptions), (req, res, next) => {register.handleRegister(req, res, db, bcrypt)});
 
 app.get('/profile/:id', (req, res) => {profile.handleProfileGet(req, res, db)});
 
