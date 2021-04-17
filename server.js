@@ -19,23 +19,23 @@ const db = knex ({
   });
 
 const app = express();
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next()
-});
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   next()
+// });
 
 app.use(bodyParser.json());
 // app.use(cors());
-app.options('*', cors())
+// app.options('*', cors())
 app.get('/', (req, res) => {
     res.send("it is working!");
 });
 
 
 app.post("/signin", (req, res) => {signin.handleSignin(req, res, db, bcrypt)});
-
+app.options('/register', cors());
 app.post('/register',cors(), (req, res) => {register.handleRegister(req, res, db, bcrypt, next)});
 
 
