@@ -21,7 +21,16 @@ const db = knex ({
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors({origin: ["http://localhost:3000","https://fr-smart-brain.herokuapp.com"]}));
+app.use(cors());
+// Add Access Control Allow Origin headers
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://localhost:3000");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 app.options("*", cors());
 
 app.get('/', (req, res) => {
