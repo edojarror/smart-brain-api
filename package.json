@@ -16,7 +16,6 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "knex": "^0.95.1",
-    "method-override": "^3.0.0",
     "pg": "^8.5.1"
   },
   "devDependencies": {
