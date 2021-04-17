@@ -3,6 +3,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt-nodejs');
 const bodyParser = require('body-parser');
 const knex = require('knex');
+const methodOverride = require('method-override')
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
