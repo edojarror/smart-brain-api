@@ -28,7 +28,12 @@ app.get('/', (req, res) => {
     res.send("it is working!");
 });
 
-app.options('*', cors());
+app.options('*', cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}));
 app.post("/signin", (req, res) => {signin.handleSignin(req, res, db, bcrypt)});
 
 app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)});
