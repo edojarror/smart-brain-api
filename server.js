@@ -37,7 +37,7 @@ const allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain);
 
 app.use(bodyParser.json());
-// app.use(cors());
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send("it is working!");
