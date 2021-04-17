@@ -30,9 +30,9 @@ app.get('/', (req, res) => {
 
 app.options('*', cors({
   "origin": "*",
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "preflightContinue": false,
-  "optionsSuccessStatus": 204
+  "methods": ['GET', 'PUT', 'POST', 'OPTIONS'],
+  "preflightContinue": false
+  
 }));
 app.post("/signin", (req, res) => {signin.handleSignin(req, res, db, bcrypt)});
 
