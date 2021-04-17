@@ -19,12 +19,21 @@ const db = knex ({
   });
 
 const app = express();
-const options1 = {
-  origin: true,
-  methods: ["POST"],
-  credentials: true,
-  maxAge: 3600
+app.use(express.methodOverride());
+const allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    
+  // intercept OPTIONS method
+  if ('OPTIONS' == req.method) {
+    res.send(200);
+  }
+  else {
+    next();
+  }
 };
+app.use(allowCrossDomain);
 
 app.use(bodyParser.json());
 // app.use(cors());
