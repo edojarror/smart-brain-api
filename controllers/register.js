@@ -1,4 +1,5 @@
-const handleRegister = (req, res, db, bcrypt) => {
+const handleRegister = (req, res, db, bcrypt, cors) => {
+  cors();
   const { name, email, password } = req.body;
   if(!name || !email || !password) {
     return res.status(400).json("incorrect registration");
