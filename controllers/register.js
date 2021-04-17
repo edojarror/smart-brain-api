@@ -1,8 +1,4 @@
-const handleRegister = (req, res, db, bcrypt, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
+const handleRegister = (req, res, db, bcrypt) => {
   const { name, email, password } = req.body;
   if(!name || !email || !password) {
     return res.status(400).json("incorrect registration");
