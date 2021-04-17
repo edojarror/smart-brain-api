@@ -19,6 +19,12 @@ const db = knex ({
   });
 
 const app = express();
+const options1 = {
+  origin: true,
+  methods: ["POST"],
+  credentials: true,
+  maxAge: 3600
+};
 
 app.use(bodyParser.json());
 // app.use(cors());
@@ -29,8 +35,8 @@ app.get('/', (req, res) => {
 
 
 app.post("/signin", (req, res) => {signin.handleSignin(req, res, db, bcrypt)});
-app.options('/register', cors())
-app.post('/register', cors(), (req, res, next) => {register.handleRegister(req, res, db, bcrypt, next)});
+app.options('/register', cors(options1))
+app.post('/register', cors(options1), (req, res, next) => {register.handleRegister(req, res, db, bcrypt, next)});
 
 app.get('/profile/:id', (req, res) => {profile.handleProfileGet(req, res, db)});
 
