@@ -20,6 +20,12 @@ const db = knex ({
 
 const app = express();
 
+const optionCors = {
+  origin: "*",
+  methods: [ "POST", "GET", "OPTIONS", "DELETE"],
+  allowedHeaders: ['Content-Type'],
+
+}
 
 app.use(express.json());
 app.use(cors());
@@ -28,15 +34,10 @@ app.get('/', (req, res) => {
     res.send("it is working!");
 });
 
-app.options('*', cors({
-  "origin": "*",
-  "methods": ['GET', 'PUT', 'POST', 'OPTIONS'],
-  "preflightContinue": false
-  
-}));
+app.options('*', cors(optionCors));
 app.post("/signin", (req, res) => {signin.handleSignin(req, res, db, bcrypt)});
 
-app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)});
+app.post('/register', cors(optionCors), (req, res) => {register.handleRegister(req, res, db, bcrypt)});
 
 
 app.get('/profile/:id', (req, res) => {profile.handleProfileGet(req, res, db)});
