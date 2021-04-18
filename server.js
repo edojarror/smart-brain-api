@@ -24,6 +24,7 @@ const optionCors = {
   origin: "*",
   methods: [ "POST", "GET", "OPTIONS", "DELETE"],
   allowedHeaders: ['Content-Type'],
+  "Access-Control-Allow-Origin": "*"
 
 }
 
