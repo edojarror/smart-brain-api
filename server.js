@@ -22,16 +22,14 @@ const app = express();
 
 const optionCors = {
   origin: "*",
-  methods: [ "POST", "GET", "OPTIONS", "DELETE"],
-  allowedHeaders: ['Content-Type'],
+  // methods: [ "POST", "GET", "OPTIONS", "DELETE"],
+  // allowedHeaders: ['Content-Type'],
   "Access-Control-Allow-Origin": "*"
 
 }
 
 app.use(bodyParser.json());
-app.use(cors({
-  origin: '*'
-}));
+app.use(cors(optionCors));
 
 app.get('/', (req, res) => {
     res.send("it is working!");
